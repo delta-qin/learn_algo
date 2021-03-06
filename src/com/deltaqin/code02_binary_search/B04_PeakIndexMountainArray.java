@@ -2,6 +2,10 @@ package com.deltaqin.code02_binary_search;
 
 //二分查找 [LeetCode852 山脉顶点位置]
 // 数组长度>=3，给定的是山脉数组，3个一定是中间，不用管
+/**
+ * @author deltaqin
+ * @date 2021/3/4
+ */
 public class B04_PeakIndexMountainArray {
 
     public int peak(int[] arr) {

@@ -5,6 +5,10 @@ import java.util.*;
 //set的方法是add
 //map的方法是put
 //stack 的方法是pop和peek
+/**
+ * @author deltaqin
+ * @date 2021/3/4
+ */
 public class ColletionTest {
     public static class Node {
         int value;

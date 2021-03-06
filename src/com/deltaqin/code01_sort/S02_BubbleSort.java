@@ -2,6 +2,10 @@ package com.deltaqin.code01_sort;
 
 import java.util.Arrays;
 
+/**
+ * @author deltaqin
+ * @date 2021/3/4
+ */
 public class S02_BubbleSort {
     public static void bubbleSort(int[] arr) {
         if(arr == null || arr.length < 2) {

@@ -7,6 +7,10 @@ package com.deltaqin.code03_linked_list;
 // 如果不相交，返 回null
 //
 // 【要求】如果两个链表长度之和为N，时间复杂度请达到O(N)，额外空间复杂度 请达到O(1)。
+/**
+ * @author deltaqin
+ * @date 2021/3/5
+ */
 public class L06_FindFirstIntersectNode {
 
 //    如果一个有环一个没有环，不可能相交，因为有环就出不去了，走不到相交的位置

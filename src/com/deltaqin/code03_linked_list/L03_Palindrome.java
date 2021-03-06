@@ -9,6 +9,10 @@ import java.util.Stack;
 // 【例子】如果链表长度为N，时间复杂度达到O(N)，额外空间复杂度达到O(1)。
 //
 // 1）额外数据结构记录（哈希表等） 2）快慢指针
+/**
+ * @author deltaqin
+ * @date 2021/3/5
+ */
 public class L03_Palindrome {
 
     public static class Node {

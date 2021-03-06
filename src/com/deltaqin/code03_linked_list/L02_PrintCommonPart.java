@@ -2,6 +2,10 @@ package com.deltaqin.code03_linked_list;
 
 //给定两个有序链表的头指针head1和head2，打印两个链表的公共部分。
 //快慢指针
+/**
+ * @author deltaqin
+ * @date 2021/3/5
+ */
 public class L02_PrintCommonPart {
     public static class Node{
         public int value;

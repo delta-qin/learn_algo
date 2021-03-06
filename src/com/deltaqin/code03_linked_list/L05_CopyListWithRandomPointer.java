@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 //注意更新链表的是后尾节点的指针也要重新指定，不能指定完next就跑路了
 // 将一个有随机指针的链表复制出来
+/**
+ * @author deltaqin
+ * @date 2021/3/5
+ */
 public class L05_CopyListWithRandomPointer {
     public static class Node {
         public int value;

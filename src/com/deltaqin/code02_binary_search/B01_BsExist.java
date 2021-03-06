@@ -1,6 +1,10 @@
 package com.deltaqin.code02_binary_search;
 
 //在一个有序数组中，找某个数是否存在
+/**
+ * @author deltaqin
+ * @date 2021/3/4
+ */
 public class B01_BsExist {
 
     public static boolean bsExist(int[] arr, int num) {

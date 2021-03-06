@@ -1,5 +1,9 @@
 package com.deltaqin.code00_test;
 
+/**
+ * @author deltaqin
+ * @date 2021/3/5
+ */
 public class BsTest {
     public static int indexOfLeft(int[] nums, int target) {
         int l = 0;

@@ -3,6 +3,10 @@ package com.deltaqin.code03_linked_list;
 // 将单向链表按某值pivot划分成左边小、中间相等、右边大的形式
 //可以复制到数组交换完了再复制回去
 //也可以直接新建三个链表最后合并，注意建立三个链表的时候Node的next要清空
+/**
+ * @author deltaqin
+ * @date 2021/3/5
+ */
 public class L04_SmallerEqualBigger {
 
     public static class Node{

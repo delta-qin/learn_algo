@@ -3,6 +3,10 @@ package com.deltaqin.code03_linked_list;
 //单链表
 //双向链表
 //步骤基本一致，就是多了一步而已
+/**
+ * @author deltaqin
+ * @date 2021/3/5
+ */
 public class L01_ReverseList {
 //    定义链表节点结构
     public static class Node {
