@@ -4,6 +4,7 @@ package com.deltaqin.code04_tree;
  * @author deltaqin
  * @date 2021/3/6 8:50 上午
  */
+// 使用树型DP的套路解题，可以向左树要信息以及向右树要信息来解题，一般是后序遍历的递归
 public class T06_IsFBT {
     public static class Node{
         public int value;
@@ -39,7 +40,7 @@ public class T06_IsFBT {
 //忘记了递归的结束条件
         if (root == null) return new ReturnVal(0 , 0);
 
-
+//      分别向左树和右树要信息
         ReturnVal left = process(root.left);
         ReturnVal right = process(root.right);
 
