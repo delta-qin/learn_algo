@@ -4,6 +4,8 @@ package com.deltaqin.code08_dp;
  * @author deltaqin
  * @date 2021/3/9 5:18 下午
  */
+
+// 一个硬币用一次，用或者不用，取最小值（也就是最少的硬币个数）
 public class D01_MinCoins {
 
 

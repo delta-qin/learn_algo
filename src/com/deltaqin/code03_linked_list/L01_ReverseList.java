@@ -3,12 +3,13 @@ package com.deltaqin.code03_linked_list;
 //单链表
 //双向链表
 //步骤基本一致，就是多了一步而已
+
 /**
  * @author deltaqin
  * @date 2021/3/5
  */
 public class L01_ReverseList {
-//    定义链表节点结构
+    //    定义链表节点结构
     public static class Node {
         public int value;
         public Node next;
@@ -18,7 +19,7 @@ public class L01_ReverseList {
         }
     }
 
-//    不用额外的空间。反转链表
+    //    不用额外的空间。反转链表
     public static Node reverseList(Node head) {
         Node pre = null;
         Node next = null;
@@ -38,7 +39,23 @@ public class L01_ReverseList {
         return pre;
     }
 
-    public static class DoubleNode{
+    // 递归反转单向链表
+    public static Node reverseList1(Node node) {
+
+        if (node == null || node.next == null) {
+            return node;
+        }
+
+        Node last = reverseList1(node.next);
+        // 链表的后序遍历，先来到链表的最后，让自己的下一个节点指向自己
+        // 自己的下一个指向设置为null（不是第一个节点的都被自己前面的设置了，头节点反转完就是指向null）
+        node.next.next = node;
+        node.next = null;
+        // last到达 递归底部之后一直没变，都是链表最后那个节点
+        return last;
+    }
+
+    public static class DoubleNode {
         public int value;
         public DoubleNode last;
         public DoubleNode next;
@@ -51,7 +68,7 @@ public class L01_ReverseList {
     public static DoubleNode revers(DoubleNode head) {
         DoubleNode pre = null;
         DoubleNode next = null;
-        while(head != null) {
+        while (head != null) {
 //            自己的下一个暂存起来
             next = head.next;
 //            自己指向自己的前一个
@@ -67,7 +84,7 @@ public class L01_ReverseList {
         return pre;
     }
 
-    public static void printLinkedList(Node  head) {
+    public static void printLinkedList(Node head) {
 
         while (head != null) {
             System.out.print(head.value + " ");
@@ -76,7 +93,7 @@ public class L01_ReverseList {
         System.out.println();
     }
 
-    public static void printLinkedList1(DoubleNode  head) {
+    public static void printLinkedList1(DoubleNode head) {
 
         while (head != null) {
             System.out.print(head.value + " ");
@@ -90,7 +107,7 @@ public class L01_ReverseList {
         head1.next = new Node(2);
         head1.next.next = new Node(3);
         printLinkedList(head1);
-        head1 = reverseList(head1);
+        head1 = reverseList1(head1);
         printLinkedList(head1);
 
         DoubleNode head2 = new DoubleNode(1);

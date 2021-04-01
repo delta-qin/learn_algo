@@ -7,6 +7,141 @@ import java.util.Arrays;
  * @date 2021/3/13 3:16 下午
  */
 public class Sort0313 {
+
+    public static void selectionSort1(int[] arr) {
+        if (arr == null || arr.length < 2) return;
+
+        for (int i = 0; i < arr.length-1; i++) {
+            int index = i;
+            for (int j = i+1; j < arr.length; j++) {
+                if (arr[j] < arr[index]) {
+                    index = j;
+                }
+            }
+            swap(arr,index,i);
+        }
+    }
+
+    public static void insertSort1(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (arr[j] < arr[j-1])
+                    swap(arr,j, j-1);
+                else break;
+            }
+        }
+    }
+
+    public static void bubbleSort1(int[] arr) {
+        if (arr == null || arr.length < 2) return;
+
+        for (int i = arr.length-1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] > arr[j+1])
+                    swap(arr, j, j+1);
+            }
+        }
+    }
+
+    //
+    public  static void  merge1(int[] arr) {
+        if (arr == null || arr.length < 2) return;
+
+        mergeSort1(arr, 0, arr.length-1);
+    }
+
+    public static void mergeSort1(int[] arr, int l, int r) {
+        //if (arr.length == 1) return;
+        if (l == r)return;
+        int mid = l + ((r-l) >> 1);
+        mergeSort1(arr, l, mid);
+        mergeSort1(arr, mid+1, r);
+        mergeTwo(arr, l, mid, r);
+    }
+
+    public static void mergeTwo(int[] arr, int l, int mid, int r) {
+        int i  = l;
+        int j = mid+1;
+        int t = 0;
+        int[]  help = new  int[r-l+1];
+
+        while (i < mid+1 && j < r+1) {
+            help[t++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
+        }
+
+        while (i < mid+1) {
+            help[t++] = arr[i++];
+        }
+
+        // 闭区间这里忘记+1
+        while (j < r+1) {
+            help[t++] = arr[j++];
+        }
+
+        i = 0;
+        // 这里范围写错
+        while (i < help.length) {
+            arr[l+i] = help[i++];
+        }
+    }
+
+    //
+    public static void quickSort1(int[] arr) {
+        if (arr == null || arr.length < 2) return;
+
+        // 闭区间
+        process1(arr, 0, arr.length-1);
+    }
+
+    public static void process1(int[] arr, int l, int r) {
+        // 这里不可以写=
+        if (l >= r) return;
+
+        int pivot = l + (int)(Math.random() * (r-l+1));
+        swap(arr, pivot, r);
+        // 返回左边的最右和右边的最左，中间等于pivot的部分不用递归
+        int[] par = partition1(arr, l, r);
+        process1(arr, l, par[0]);
+        process1(arr, par[1], r);
+    }
+
+    public static int[] partition1(int[] arr, int l, int r) {
+
+        int left = l-1;
+        // r 位置是游标的位置
+        int right = r;
+        int you = l;
+        while (you < right) {
+            if (arr[you] < arr[r]) {
+                swap(arr, you++, ++left);
+            } else  if (arr[you] > arr[r]) {
+                swap(arr, you, --right);
+            } else {
+                you++;
+            }
+        }
+        swap(arr,you, r);
+        return new int[]{left , right};
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void insertSort(int[] arr) {
         if (arr == null || arr.length < 2) return;
 
@@ -21,9 +156,7 @@ public class Sort0313 {
         //            break;
         //        }
         //    }
-        //}
 
-        // 都是从右往左比
         for (int i = 1; i<arr.length; i++) {
             for (int j = i; j > 0; j--) {
                 // j 不能取到0， 不能取到最右侧arr.length，严谨数组越界问题
@@ -176,10 +309,12 @@ public class Sort0313 {
         for (int i = 0; i < maxTime; i++) {
             int[] arr1 = generateRandomArray(maxSize, maxValue);
             int[] arr2 = copyArray(arr1);
-            insertSort(arr1);
-            selectionSort(arr1);
-            bubbleSort(arr1);
-            quickSort(arr1);
+            insertSort1(arr1);
+            //selectionSort1(arr1);
+            //bubbleSort1(arr1);
+            //merge1(arr1);
+            //quickSort(arr1);
+            quickSort1(arr1);
             comparator(arr2);
             if (!isEqual(arr1, arr2)){
                 succeed = false;
