@@ -10,16 +10,16 @@ import sun.text.normalizer.Trie;
 // 有多少是以当前值为前缀的，可以通过path的值来判断
 public class T12_TrieTree {
 
-    public static class Node{
+    public static class Node {
 //    如果只有英文字母，那么一个树的节点最多有26个,所以没有必要记录每一个节点的每一个字符是什么，
 //    毕竟只是为了查找个数，不是为了查找具体的字符，浪费空间，直接使用26个占位，不为空的就是有
 //        public char c;
 
-//    根节点是代表空字符的，每一个节点都有自己的
+        //    根节点是代表空字符的，每一个节点都有自己的
 //      path 值（路过+1） 和end值（结束+1）
 //    一个节点就是一个字符，
         public int path;
-        public int end ;
+        public int end;
         public Node[] nexts;
 
         public Node() {
@@ -48,14 +48,14 @@ public class T12_TrieTree {
             node.path++;
 //            在数组里面索引的位置
             int index = 0;
-            for (int i=0; i<strings.length; i++) {
+            for (int i = 0; i < strings.length; i++) {
                 // 从左到右遍历字符串，先得到对应nexts的索引位置
                 index = strings[i] - 'a';
                 // index 方向有没有节点，就是看有没有路
                 if (node.nexts[index] == null) {
                     node.nexts[index] = new Node();
                 }
-//                注意下面两句，先移动node为当前节点，再++，不然加到了上一个上面
+                // 注意下面两句，先移动node为当前节点，再++，不然加到了上一个上面
                 node = node.nexts[index];
                 node.path++;
             }
@@ -72,12 +72,12 @@ public class T12_TrieTree {
                 node.path--;
 //            在数组里面索引的位置
                 int index = 0;
-                for (int i=0; i<strings.length; i++) {
+                for (int i = 0; i < strings.length; i++) {
                     // 从左到右遍历字符串，先得到对应nexts的索引位置
                     index = strings[i] - 'a';
                     // 沿途--p。不是p--.因为需要判断是否为0
                     // 如果p减去之后是0
-                    if (--node.nexts[index].path == 0){
+                    if (--node.nexts[index].path == 0) {
 //                        巧妙
 //                        path 为0后续直接不要了，说明只有他自己
                         node.nexts[index] = null;

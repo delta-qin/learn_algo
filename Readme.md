@@ -2,8 +2,6 @@
 
 # 数据结构和算法从入门到放弃（java详细注释版）
 
-**这一次，学算法是认真的！！！**
-
 （每日更新中...欢迎指正）
 
 ## 文件夹说明：
@@ -40,7 +38,24 @@
 
 ## code03 链表
 
-单向，双向链表节点定义
+### 思路总结
+
+| 题目                                                         | 思路                                                         | 易错点                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [反转链表](./src/com/deltaqin/code03_linked_list/L01_ReverseList.java) | 单向链表：先将next存起来，head指向自己的前面pre，然后head自己变成pre，然后next变成head<br />next = head.next; head.next = pre; pre = head; head = next; | 四个的顺序，<br />head == null是结束条件                     |
+|                                                              | 递归单向链表：<br />首先是递归后序遍历链表的思路，自己先到达链表的尾部，也就是递归底部，开始让自己的下一个指向自己，自己指向null，每次自己的指向有自己前面的负责更新，这样最后第一个节点设置null之后没人给他更新，就是真的null了 | 返回值就是递归函数的返回值last，一直都是最后那个节点         |
+|                                                              | 反转双向链表：<br />只需要在next指向自己前一个节点的时候，加一个pre指向自己后一个节点即可 | 返回值是head不是pre，因为循环的结束条件是pre==null           |
+| 反转链表的前N项                                              | 递归，后序。一开始先记录head的后继节点，注意递归的全反转是不需要记录自己的下一个节点是谁的。递归函数的作用是用自己的下一个节点，反转前n-1个节点。返回链表的头部。<br />自己的下一个节点指向自己，自己指向一开始存的后继，因为不是全部反转，所以最后一个应该指向没有反转的开头而不是null | 注意递归函数的参数定义。一个是等待反转的头节点，一个是反转的链表的个数<br />递归的结束条件是n==1,并且最后一个返回自己还要记录后驱节点<br />后驱节点不可以写在函数递归栈里面 |
+| [打印公共子串](./src/com/deltaqin/code01_sort/S02_BubbleSort.java) |                                                              |                                                              |
+| [回文判断](./src/com/deltaqin/code01_sort/S02_BubbleSort.java) |                                                              |                                                              |
+| 给定pivot划分为左中右三部分                                  |                                                              |                                                              |
+| 复制有随机指针的链表（random指针可以是null）                 |                                                              |                                                              |
+| 找（有无环）链表的交点                                       |                                                              |                                                              |
+| 实现一个队列                                                 |                                                              |                                                              |
+| 实现一个栈                                                   |                                                              |                                                              |
+| 用栈实现一个队列                                             |                                                              |                                                              |
+
+### 单向，双向链表节点定义
 
 ```java
 public class Demo{
@@ -65,19 +80,6 @@ public class Demo{
 ```
 
 
-
-| 题目                                                         | 思路                                                         | 易错点                                   |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------------- |
-| [反转链表](./src/com/deltaqin/code03_linked_list/L01_ReverseList.java) | 单向链表：先将next存起来，head指向自己的前面pre，然后head自己变成pre，然后next变成head<br />next = head.next; head.next = pre; pre = head; head = next; | 四个的顺序，<br />head == null是结束条件 |
-|                                                              | 递归单向链表：<br />首先是递归后序遍历链表的思路，自己先到达链表的尾部，也就是递归底部，开始让自己的下一个指向自己，自己指向null，每次自己的指向有自己前面的负责更新，这样最后第一个节点设置null之后没人给他更新，就是真的null了 |                                          |
-| [打印公共子串](./src/com/deltaqin/code01_sort/S02_BubbleSort.java) |                                                              |                                          |
-| [回文判断](./src/com/deltaqin/code01_sort/S02_BubbleSort.java) |                                                              |                                          |
-| 给定pivot划分为左中右三部分                                  |                                                              |                                          |
-| 复制有随机指针的链表（random指针可以是null）                 |                                                              |                                          |
-| 找（有无环）链表的交点                                       |                                                              |                                          |
-| 实现一个队列                                                 |                                                              |                                          |
-| 实现一个栈                                                   |                                                              |                                          |
-| 用栈实现一个队列                                             |                                                              |                                          |
 
 ### 反转单向链表
 
@@ -137,6 +139,51 @@ public static Node reverse(Node head) {
   return pre;
 }
 ```
+
+### 反转链表的前N项
+
+递归，后序遍历，注意自己最后不是null，而是不反转的开头节点。
+
+递归的结束条件是当前需要反转的节点就剩下一个了。
+
+```java
+// 保存不反转的 前缀
+Node successor = null;
+
+// 给定要反转 n 个节点，返回反转完的头节点
+public static Node reverseN(Node head, int n) {
+  // 结束条件是反转到最后，不是为null
+  if (n == 1) {
+    successor = head.next;
+    return head;
+  }
+  
+  Node last = reverseN(head.next, n-1);
+  head.next.next = head;
+  // 为了和不反转的开头相连
+  head.next = successor;
+  return last;
+}
+```
+
+### 反转链表的一部分
+
+这个需要和前面的反转链表的前N项结合。反转完之后后面是接住的，只要手动把前面接一下就好了
+
+```java
+public static reverseBetween(Node head, int m, int n) {
+  if(m == 1) {
+   	// 直接调用反转自己的前n项
+    reverseN(head, n);
+  }
+  
+  // 注意要反转的链表的相对长度是没有变化的。都-1
+  head.next = reverseBetween(head.next, m-1, n-1);
+  return head;
+}
+```
+
+
 
 
 

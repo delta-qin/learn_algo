@@ -15,10 +15,10 @@ public class S06_QuickSort {
         quickSort(arr, 0, arr.length - 1);
     }
 
-    private static void quickSort(int[] arr, int l , int r) {
+    private static void quickSort(int[] arr, int l, int r) {
         if (l < r) {
             // 将分区的pivot放在数组的最后
-            swap(arr, l + (int) (Math.random() * (r-l+1)), r);
+            swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
             // 对数组分区，将分好的两个数组，前面的最后一个index和后面的最前一个index放在数组里返回
             int[] p = partition(arr, l, r);
             //p[0] 是左分区的右边界，闭区间
@@ -38,7 +38,7 @@ public class S06_QuickSort {
     private static int[] partition(int[] arr, int l, int r) {
         int i = l;
         // 注意初始化左右分区的边界的时候由于是闭区间，所以一开始是最左和最右之外的一个
-        int less = l -1;
+        int less = l - 1;
         int right = r;
         //less 往右，right往左，当游标和right相遇的时候，就分好了
         while (i < right) {
@@ -145,7 +145,6 @@ public class S06_QuickSort {
         quickSort(arr);
         printArray(arr);
     }
-
 
 
 }

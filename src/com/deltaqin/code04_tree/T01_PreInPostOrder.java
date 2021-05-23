@@ -8,7 +8,7 @@ import java.util.Stack;
  */
 public class T01_PreInPostOrder {
 
-    public static class Node{
+    public static class Node {
         public int value;
         public Node left;
         public Node right;
@@ -18,7 +18,7 @@ public class T01_PreInPostOrder {
         }
     }
 
-//    =======递归实现============================
+    //    =======递归实现============================
     public static void preOrder(Node root) {
         if (root == null) {
             return;
@@ -52,10 +52,10 @@ public class T01_PreInPostOrder {
 
 //    非递归实现
 
-//    使用一个栈就可以实现先序遍历，先压右再压入左即可
+    //    使用一个栈就可以实现先序遍历，先压右再压入左即可
     public static void preOrderUnRecursion(Node root) {
 //        不要把null压入栈
-        if(root == null) return;
+        if (root == null) return;
 
 
         Stack<Node> stack = new Stack<>();
@@ -75,19 +75,19 @@ public class T01_PreInPostOrder {
         }
     }
 
-//    较难理解
+    //    较难理解
     public static void inOrderUnRecursion(Node root) {
         if (root == null) return;
 
         Stack<Node> stack = new Stack<>();
 //        栈不为空，或者（如果树是一个只有右子树的链表形式，流程就是压入一个弹出一个，栈空和root不为空交替出现）
-        while (!stack.isEmpty() || root!=null) {
+        while (!stack.isEmpty() || root != null) {
 //          如果右子节点是null就继续弹出，如果不是null就开始压入他的左边界
-            if (root != null ) {
+            if (root != null) {
 //                左边界压栈
                 stack.push(root);
                 root = root.left;
-            } else  {
+            } else {
                 root = stack.pop();
                 System.out.print(root.value + " ");
 //                必须更新root，如果是null，则会继续向上，弹出，否则向下开始压入右子节点
@@ -96,7 +96,7 @@ public class T01_PreInPostOrder {
         }
     }
 
-//    使用两个栈实现
+    //    使用两个栈实现
     public static void postOrderUnRecursion(Node root) {
         if (root == null) return;
 
@@ -123,7 +123,7 @@ public class T01_PreInPostOrder {
         }
     }
 
-//    使用一个栈实现非递归后序遍历（不好理解！！！）
+    //    使用一个栈实现非递归后序遍历（不好理解！！！）
 //    还是相当于左边界压栈，但是使用一个栈的时候要判断自己压入的节点是不是之前已经压入并且弹出的，避免重复压入
     public static void postOrderUnRecursion1(Node root) {
         if (root == null) return;
@@ -133,13 +133,13 @@ public class T01_PreInPostOrder {
         Node stackTop = null;
         while (!stack.isEmpty()) {
             stackTop = stack.peek();
-            if ( stackTop.left != null && root != stackTop.left && root != stackTop.right) {
-//                如果栈顶元素有左子节点，且上一次弹出的不是他的左孩子或者右孩子，那么他就可以入栈，
-//                否则说明应该是他的右孩子入栈或者他自己出栈了
+            // 栈顶有左孩子，因为栈是先压左后压右，
+            // 如果上一个是自己左孩子，说明自己左孩子已经出去了。应该弹出自己了
+            // 如果上一个是自己右孩子，说明左孩子已经压进去了。应该弹出自己的左孩子了
+            if (stackTop.left != null && root != stackTop.left && root != stackTop.right) {
                 stack.push(stackTop.left);
             } else if (stackTop.right != null && root != stackTop.right) {
-//                如果右孩子不为空而且上一次弹出的不是右孩子，那么就可以不弹出栈顶而是把右孩子压入
-//                因为是后序遍历，左右都出去，中才出去
+                // 有右孩子而且上一个弹出的不是自己右孩子，说明
                 stack.push(stackTop.right);
             } else {
 //                来到这里，说明
